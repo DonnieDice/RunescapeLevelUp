@@ -1,0 +1,15 @@
+## Interface: 11508
+## Version: 2.0.0
+## Title: |cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r
+## Notes: Play an Old School RuneScape-inspired level-up sound!  |n|r  |cff767778/rslu -|r Open help  |n|r   |cff767778By DonnieDice|r
+## Author: DonnieDice
+## SavedVariables: RSLUSettings
+
+## X-Category: UI Media, Questing & Leveling, Audio & Video, Miscellaneous
+## X-Website: https://github.com/DonnieDice/RunescapeLevelUp
+## X-Curse-Project-ID: 420124
+## X-Wago-ID: 96VPaMNb
+## X-WoWI-ID: 26260
+
+data\locales.lua
+data\core.lua
