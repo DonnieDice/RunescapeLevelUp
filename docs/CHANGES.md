@@ -1,3 +1,8 @@
+v2.0.1
+
+- Hardened slash command and event handling with protected calls so runtime errors surface cleanly instead of breaking addon execution
+- Added setting validation and safer sound playback checks to keep invalid state from silently failing
+
 v2.0.0
 
 - Renamed addon files, TOCs, and package metadata from `OSRSLU` to `RunescapeLevelUp`
