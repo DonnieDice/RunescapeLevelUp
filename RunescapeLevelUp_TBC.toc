@@ -1,5 +1,5 @@
 ## Interface: 20504
-## Version: 2.0.1
+## Version: 2.0.2
 ## Title: |cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r
 ## Notes: Play an Old School RuneScape-inspired level-up sound!  |n|r  |cff767778/rslu -|r Open help  |n|r   |cff767778By DonnieDice|r
 ## Author: DonnieDice

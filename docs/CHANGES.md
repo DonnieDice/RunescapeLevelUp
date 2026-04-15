@@ -1,3 +1,8 @@
+v2.0.2
+
+- Fixed GitHub Actions workflow `if` conditionals to use canonical expression syntax
+- Removed redundant `${{ }}` wrappers from conditional steps
+
 v2.0.1
 
 - Hardened slash command and event handling with protected calls so runtime errors surface cleanly instead of breaking addon execution
