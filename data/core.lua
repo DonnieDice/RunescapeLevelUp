@@ -1,6 +1,6 @@
 RSLU = RSLU or {}
 
-local ADDON_VERSION = "2.0.1"
+local ADDON_VERSION = "2.0.4"
 local ADDON_NAME = "RunescapeLevelUp"
 local TITLE = "[|cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r]"
 local SOUND_PATHS = {
