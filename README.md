@@ -1,5 +1,5 @@
 # <span style="color:#767778">R</span><span style="color:#fff">unescape </span><span style="color:#767778">L</span><span style="color:#fff">evel-</span><span style="color:#767778">U</span><span style="color:#fff">p</span><span style="color:#767778">!</span>
-## <img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" height="20"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#767778">Community Project</span>
+## <img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif" height="20"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#767778">Community Project</span>
 
 <div align="center">
 
@@ -65,7 +65,7 @@
 - <span style="color:#767778">📢 **First to know**</span> <span style="color:#e67e23">about new</span> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#e67e23">releases</span>
 - <span style="color:#e67e23">🎉 **Events, giveaways**, and community activities</span>
 
-<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" alt="RealmGX Kiwi" width="100">
+<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif" alt="RealmGX Kiwi" width="100">
 
 **<span style="color:#ff6b6b">⚠️ WARNING:</span>** <span style="color:#e67e23">May cause excessive nostalgia.</span>
 
@@ -326,7 +326,7 @@ _<span style="color:#e67e23">"May your levels be swift and your XP drops be lege
 
 **<span style="color:#767778">⚠️ WARNING:</span>** <span style="color:#e67e23">May cause excessive nostalgia.</span>
 
-<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" alt="RealmGX Kiwi" width="80">
+<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif" alt="RealmGX Kiwi" width="80">
 
 **<span style="color:#2dc26b">The Kiwi Says:</span>** <span style="color:#b96ad9">"XP drop complete. Bwwiiiee."</span>
 
@@ -336,6 +336,6 @@ _<span style="color:#e67e23">"May your levels be swift and your XP drops be lege
 
 [<span style="color:#05dffa">BLU</span>](https://github.com/donniedice/BLU) | [<span style="color:#05dffa">BLU Classic</span>](https://github.com/donniedice/BLU_Classic) | [<span style="color:#9b59b6">CCU</span>](https://github.com/donniedice/CoordinationCloakUtility) | [<span style="color:#ffe568">FFLU</span>](https://github.com/donniedice/FinalFantasyLevelUp) | [<span style="color:#2563EB">MSLU</span>](https://github.com/donniedice/MaplestoryLevelUp) | [<span style="color:#4F4F4F">MW2LU</span>](https://github.com/donniedice/ModernWarfare2LevelUp) | [<span style="color:#58be81">PetBuddy2</span>](https://github.com/donniedice/PetBuddy2) | [<span style="color:#ffcb05">PLU</span>](https://github.com/donniedice/PokemonLevelUp) | [<span style="color:#e74c3c">RND</span>](https://github.com/DonnieDice/RemoveNameplateDebuffs) | [<span style="color:#58be81">SQP</span>](https://github.com/donniedice/SimpleQuestPlates) | [<span style="color:#8B4513">SRLU</span>](https://github.com/donniedice/SkyrimLevelUp)
 
-**<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/images/kiwi.gif" width="18" height="18"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> <span style="color:#e67e23">Powered by</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#e67e23">Community</span>**
+**<img src="https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif" width="18" height="18"> <span style="color:#8B1538">R</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span> <span style="color:#4ecdc4">Mods</span> <span style="color:#3598db">-</span> <span style="color:#e67e23">Powered by</span> [<span style="color:#8B1538">R</span><span style="color:#7598b6">ealm</span><span style="color:#8B1538">G</span><span style="color:#8B1538">X</span>](https://realmgx.com) <span style="color:#e67e23">Community</span>**
 
 </div>
