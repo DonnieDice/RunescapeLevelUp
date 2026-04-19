@@ -3,9 +3,28 @@ name: Package and Release
 on:
   push:
     tags:
-      - "v*"
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+-beta*'
+      - 'v[0-9]+.[0-9]+.[0-9]+-alpha*'
     branches:
       - alpha
+      - dev
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: Release channel to publish/notify
+        required: true
+        default: release
+        type: choice
+        options:
+          - release
+          - beta
+          - alpha
+      tag_name:
+        description: Tag name to use in release links and notifications
+        required: false
+        default: v2.0.4
+        type: string
 
 env:
   CF_API_KEY: ${{ secrets.CF_API_KEY }}
@@ -21,48 +40,53 @@ jobs:
       contents: write
 
     steps:
-      - name: Clone Project
+      - name: 🛠️ Clone Project
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Install jq
+      - name: 🧰 Install jq
         run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Configure Git user
+      - name: 🧑‍🔧 Configure Git User
         run: |
           git config --global user.name "donniedice"
           git config --global user.email "donniedice@protonmail.com"
 
-      - name: Determine Release Type
+      - name: 🧭 Determine Release Type
         id: release_type
-        shell: bash
         run: |
-          case "${{ github.ref }}" in
-            refs/tags/*)
-              if [[ "${{ github.ref }}" == *"beta"* ]]; then
-                echo "type=beta" >> "$GITHUB_OUTPUT"
-              elif [[ "${{ github.ref }}" == *"alpha"* ]]; then
-                echo "type=alpha" >> "$GITHUB_OUTPUT"
-              else
-                echo "type=release" >> "$GITHUB_OUTPUT"
-              fi
-              ;;
-            refs/heads/alpha)
-              echo "type=alpha-branch" >> "$GITHUB_OUTPUT"
-              ;;
-            *)
-              echo "type=unknown" >> "$GITHUB_OUTPUT"
-              ;;
-          esac
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "type=${{ inputs.release_type }}" >> $GITHUB_OUTPUT
+          else
+            case "${{ github.ref }}" in
+              refs/tags/*)
+                if [[ "${{ github.ref }}" == *"beta"* ]]; then
+                  echo "type=beta" >> $GITHUB_OUTPUT
+                elif [[ "${{ github.ref }}" == *"alpha"* ]]; then
+                  echo "type=alpha" >> $GITHUB_OUTPUT
+                else
+                  echo "type=release" >> $GITHUB_OUTPUT
+                fi
+                ;;
+              refs/heads/dev)
+                echo "type=dev" >> $GITHUB_OUTPUT
+                ;;
+              refs/heads/alpha)
+                echo "type=alpha-branch" >> $GITHUB_OUTPUT
+                ;;
+              *)
+                echo "type=unknown" >> $GITHUB_OUTPUT
+                ;;
+            esac
+          fi
 
-      - name: Extract Version from TOC
+      - name: 📦 Extract Version from TOC
         id: version
-        shell: bash
         run: |
-          version="$(grep -oP '^## Version: \K(.*)' RunescapeLevelUp.toc)"
-          echo "version=$version" >> "$GITHUB_OUTPUT"
-          echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" >> "$GITHUB_OUTPUT"
+          version=$(grep -oP '^## Version: \K(.*)' RunescapeLevelUp.toc)
+          echo "version=$version" >> $GITHUB_OUTPUT
+          echo "timestamp=$(date -u +%Y-%m-%dT%H:%M:%S.000Z)" >> $GITHUB_OUTPUT
 
       - name: Validate Release Metadata
         shell: bash
@@ -77,12 +101,16 @@ jobs:
           echo "  X-Wago-ID: ${wago_id:-missing}"
           echo "  X-WoWI-ID: ${wowi_id:-missing}"
 
+          if [[ -z "$curse_id" ]]; then
+            echo "::warning::X-Curse-Project-ID is missing. CurseForge upload will be skipped."
+          fi
+
           if [[ -z "$wago_id" ]]; then
-            echo "::warning::X-Wago-ID is missing in RunescapeLevelUp.toc. Wago upload will be skipped."
+            echo "::warning::X-Wago-ID is missing. Wago upload will be skipped."
           fi
 
           if [[ -z "$wowi_id" ]]; then
-            echo "::warning::X-WoWI-ID is missing in RunescapeLevelUp.toc. WoWInterface upload will be skipped."
+            echo "::warning::X-WoWI-ID is missing. WoWInterface upload will be skipped."
           fi
 
           if [[ "$GITHUB_REF" == refs/tags/* ]]; then
@@ -95,18 +123,13 @@ jobs:
               exit 1
             fi
 
-            if [[ -z "$curse_id" ]]; then
-              echo "::error::Missing X-Curse-Project-ID in RunescapeLevelUp.toc. CurseForge upload cannot run."
-              exit 1
-            fi
-
-            if [[ -z "${CF_API_KEY:-}" ]]; then
-              echo "::error::CF_API_KEY secret is missing. CurseForge upload cannot run."
+            if [[ -n "$curse_id" && -z "${CF_API_KEY:-}" ]]; then
+              echo "::error::CF_API_KEY secret is missing but X-Curse-Project-ID is set. CurseForge upload cannot run."
               exit 1
             fi
           fi
 
-      - name: Extract Latest Changelog
+      - name: 📝 Extract Latest Changelog
         id: changelog
         shell: bash
         run: |
@@ -144,18 +167,16 @@ jobs:
             echo "EOF"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Package and Release
+      - name: 📦 Package and Release
         uses: BigWigsMods/packager@master
-        with:
-          release-type: ${{ steps.release_type.outputs.type == 'alpha-branch' && 'alpha' || steps.release_type.outputs.type }}
 
-      - name: Upload Notes
+      - name: ℹ️ Upload Notes
         run: |
           echo "CurseForge, Wago, and WoWInterface uploads are handled by BigWigsMods/packager."
           echo "Project IDs come from X-Curse-Project-ID, X-Wago-ID, and X-WoWI-ID in RunescapeLevelUp.toc."
 
-      - name: Send Discord Notification
-        if: success() && env.DISCORD_WEBHOOK != ''
+      - name: 📢 Send Discord Notification
+        if: success()
         shell: bash
         env:
           DISCORD_SUMMARY: ${{ steps.changelog.outputs.discord_summary }}
@@ -170,30 +191,39 @@ jobs:
           case "$release_type" in
             "release")
               title="RSLU | Runescape Level-Up! ${version}"
-              color=7763574
-              footer="RGX Mods - Stable Release"
-              description="A new stable release is live."
+              color=8876605
+              footer="RGX Mods • Stable Release"
+              description="A new stable release is live. Level up in style!"
               release_url="https://github.com/DonnieDice/RunescapeLevelUp/releases/tag/v${version#v}"
-              downloads="[CurseForge](https://www.curseforge.com/wow/addons/runescapelevelup) • [Wago](https://addons.wago.io/addons/runescapelevelup) • [WoWInterface](https://www.wowinterface.com/downloads/info26260) • [GitHub](${release_url})"
+              downloads="[CurseForge](https://www.curseforge.com/wow/addons/runescape-level-up) • [Wago](https://addons.wago.io/addons/runescape-level-up) • [WoWInterface](https://www.wowinterface.com/downloads/info26260) • [GitHub](${release_url})"
               channel="Release"
               ;;
             "beta")
               title="RSLU | Runescape Level-Up! ${version} (Beta)"
               color=16744448
-              footer="RGX Mods - Beta Build"
+              footer="RGX Mods • Beta Build"
               description="Beta build available for testing."
               release_url="https://github.com/DonnieDice/RunescapeLevelUp/releases/tag/v${version#v}"
-              downloads="[CurseForge](https://www.curseforge.com/wow/addons/runescapelevelup) • [GitHub](${release_url})"
+              downloads="[CurseForge](https://www.curseforge.com/wow/addons/runescape-level-up) • [GitHub](${release_url})"
               channel="Beta"
               ;;
             "alpha"|"alpha-branch")
               title="RSLU | Runescape Level-Up! ${version} (Alpha)"
               color=9109504
-              footer="RGX Mods - Alpha Build"
+              footer="RGX Mods • Alpha Build"
               description="Alpha build available for testing."
               release_url="https://github.com/DonnieDice/RunescapeLevelUp/tree/alpha"
               downloads="[GitHub Alpha Branch](${release_url})"
               channel="Alpha"
+              ;;
+            "dev")
+              title="RSLU | Runescape Level-Up! ${version} (Dev)"
+              color=3447003
+              footer="RGX Mods • Dev Build"
+              description="Development build from the dev branch."
+              release_url="https://github.com/DonnieDice/RunescapeLevelUp/tree/dev"
+              downloads="[GitHub Dev Branch](${release_url})"
+              channel="Dev"
               ;;
             *)
               title="RSLU | Runescape Level-Up! ${version}"
@@ -207,7 +237,7 @@ jobs:
           esac
 
           jq -n \
-            --arg username "RunescapeLevelUp Releases" \
+            --arg username "RSLU Releases" \
             --arg avatar_url "https://raw.githubusercontent.com/DonnieDice/RunescapeLevelUp/main/media/logo.png" \
             --arg title "$title" \
             --arg url "$release_url" \
@@ -228,7 +258,7 @@ jobs:
                 description: $description,
                 color: $color,
                 fields: [
-                  { name: "What'\''s New", value: ($summary | if . == "" then "No changelog summary available." else . end), inline: false },
+                  { name: "What'\''s New", value: $summary, inline: false },
                   { name: "Downloads", value: $downloads, inline: false },
                   { name: "Channel", value: $channel, inline: true }
                 ],
@@ -241,31 +271,30 @@ jobs:
             -H "Content-Type: application/json" \
             -X POST -d @payload.json "$DISCORD_WEBHOOK"
 
-      - name: Send Failure Notification
-        if: failure() && env.DISCORD_WEBHOOK != ''
-        shell: bash
+      - name: ❌ Send Failure Notification
+        if: failure()
         run: |
           jq -n \
             --arg version "${{ steps.version.outputs.version || 'Unknown' }}" \
             --arg run_id "${{ github.run_id }}" \
             --arg timestamp "${{ steps.version.outputs.timestamp }}" \
             '{
-              username: "RunescapeLevelUp Build Failed",
+              username: "RSLU Build Failed",
               avatar_url: "https://raw.githubusercontent.com/DonnieDice/RunescapeLevelUp/main/media/logo.png",
               embeds: [{
-                title: "RunescapeLevelUp Build Failed",
+                title: "❌ RSLU Build Failed",
                 description: "The release workflow encountered an error",
                 url: "https://github.com/DonnieDice/RunescapeLevelUp/actions/runs/\($run_id)",
                 color: 15158332,
                 fields: [
-                  { name: "Version", value: $version, inline: true },
-                  { name: "Workflow", value: "[View Logs](https://github.com/DonnieDice/RunescapeLevelUp/actions/runs/\($run_id))", inline: true }
+                  { "name": "Version", "value": $version, "inline": true },
+                  { "name": "Workflow", "value": "[View Logs](https://github.com/DonnieDice/RunescapeLevelUp/actions/runs/\($run_id))", "inline": true }
                 ],
                 footer: {
-                  text: "RGX Mods - Build System",
-                  icon_url: "https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif"
+                  "text": "RGX Mods - Build System",
+                  "icon_url": "https://raw.githubusercontent.com/donniedice/SimpleQuestPlates/main/media/kiwi.gif"
                 },
                 timestamp: $timestamp
               }]
             }' > payload.json
-          curl -H "Content-Type: application/json" -X POST -d @payload.json "$DISCORD_WEBHOOK"
+          curl -H "Content-Type: application/json" -X POST -d @payload.json $DISCORD_WEBHOOK
