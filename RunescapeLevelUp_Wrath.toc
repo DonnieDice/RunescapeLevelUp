@@ -1,7 +1,8 @@
 ## Interface: 30403
-## Version: 2.0.6
-## Title: |cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r
-## Notes: Play an Old School RuneScape-inspired level-up sound!  |n|r  |cff767778/rslu -|r Open help  |n|r   |cff767778By DonnieDice|r
+## Version: 2.0.7
+## Title:  |cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r
+## Notes:  Play an Old School RuneScape-inspired level-up sound!  |n|r  |cff767778/rslu -|r Open help  |n|r   |cff767778By DonnieDice|r
+## IconTexture: Interface\AddOns\RunescapeLevelUp\media\icon
 ## Author: DonnieDice
 ## SavedVariables: RSLUSettings
 
