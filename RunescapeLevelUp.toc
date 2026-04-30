@@ -8,7 +8,7 @@
 
 ## X-Category: UI Media, Questing & Leveling, Audio & Video, Miscellaneous
 ## X-Website: https://github.com/DonnieDice/RunescapeLevelUp
-## X-Curse-Project-ID: 420124
+## X-Curse-Project-ID: 594575
 ## X-Wago-ID: 96VPaMNb
 ## X-WoWI-ID: 26260
 
