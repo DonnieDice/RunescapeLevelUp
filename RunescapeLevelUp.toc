@@ -1,5 +1,5 @@
 ## Interface: 11508,40402,50503,110207,120000,120001,120005
-## Version: 3.0.0
+## Version: 3.0.1
 ## Title:  |cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r
 ## Notes:  Play an Old School RuneScape-inspired level-up sound!  |n|r  |cff767778/rslu -|r Open help  |n|r   |cff767778By DonnieDice|r
 ## IconTexture: Interface\AddOns\RunescapeLevelUp\media\icon

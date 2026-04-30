@@ -9,11 +9,10 @@ local RGX = assert(_G.RGXFramework, "RSLU: RGX-Framework not loaded")
 
 RSLU = RSLU or {}
 
-local ADDON_VERSION = "3.0.0"
+local ADDON_VERSION = "3.0.1"
 local ADDON_NAME = "RunescapeLevelUp"
-local ICON_PATH = "|Tinterface/addons/RunescapeLevelUp/media/icon:16:16|t"
-local PREFIX = ICON_PATH .. " |cff767778RSLU:|r"
-local TITLE = "[|cff767778R|r|cffffffffunescape|r |cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r]"
+local PREFIX = "|Tinterface/addons/RunescapeLevelUp/media/icon:16:16|t - |cffffffff[|r|cff767778RSLU|r|cffffffff]|r "
+local TITLE = "|Tinterface/addons/RunescapeLevelUp/media/icon:18:18|t [|cff767778R|r|cffffffffunescape|r |cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r]"
 
 RSLU.version = ADDON_VERSION
 RSLU.addonName = ADDON_NAME
