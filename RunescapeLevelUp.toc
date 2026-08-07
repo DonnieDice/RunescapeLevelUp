@@ -1,9 +1,11 @@
 ﻿## Interface: 11509,20506,50504,120007
-## Version: 3.0.2
+## Version: 3.0.3
 ## Title:  |cff767778R|r|cffffffffunescape |r|cff767778L|r|cffffffffevel-|r|cff767778U|r|cffffffffp|r|cff767778!|r
 ## Notes:  Play an Old School RuneScape-inspired level-up sound!  |n|r  |cff767778/rslu -|r Open help  |n|r   |cff767778By DonnieDice|r
-## IconTexture: Interface\AddOns\RunescapeLevelUp\media\icon
 ## Author: DonnieDice
+## Category: RGX
+## Group: RGX
+## IconTexture: Interface\AddOns\RunescapeLevelUp\media\icon
 ## SavedVariables: RSLUSettings
 ## RequiredDeps: RGX-Framework
 
