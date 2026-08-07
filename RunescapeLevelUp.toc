@@ -5,7 +5,7 @@
 ## Author: DonnieDice
 ## Category: RGX
 ## Group: RGX
-## IconTexture: Interface\AddOns\RunescapeLevelUp\media\icon
+## IconTexture: Interface\AddOns\RunescapeLevelUp\media\icon.tga
 ## SavedVariables: RSLUSettings
 ## RequiredDeps: RGX-Framework
 
