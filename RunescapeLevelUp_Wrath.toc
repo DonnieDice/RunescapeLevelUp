@@ -8,7 +8,7 @@
 ## RequiredDeps: RGX-Framework
 
 ## X-Category: UI Media, Questing & Leveling, Audio & Video, Miscellaneous
-## X-Website: https://github.com/DonnieDice/RunescapeLevelUp
+## X-Website: https://github.com/RGXMods/RunescapeLevelUp
 ## X-Curse-Project-ID: 594575
 ## X-Wago-ID: 96VPaMNb
 ## X-WoWI-ID: 26260
